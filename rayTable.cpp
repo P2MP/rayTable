@@ -2,13 +2,11 @@
 #include <string>
 #include <sstream>
 
-
 using namespace std;
 
 const short tsize_x = 20;
 const short tsize_y = 20;
 string rayTable[tsize_y][tsize_x];
-
 
 int validation(string convert)
 {
@@ -25,8 +23,6 @@ int validation(string convert)
     }
 
 }
-
-
 void rayTablePrint()
 {
     for (int i = 0; i < tsize_y; i++)
@@ -52,7 +48,6 @@ void rayTablePrint()
         //for (int i = 0;)
     }
 }
-
 void rayTableClear()
 {
     for (int i = 0; i < tsize_y; i++)
@@ -64,7 +59,6 @@ void rayTableClear()
     }
 
 }
-
 int main()
 {
     rayTableClear();
