@@ -4,8 +4,8 @@
 
 using namespace std;
 
-const short tsize_x = 20;
-const short tsize_y = 20;
+const short tsize_x = 50;
+const short tsize_y = 50;
 string rayTable[tsize_y][tsize_x];
 
 int validation(string convert)
@@ -13,7 +13,7 @@ int validation(string convert)
     int i;
     stringstream ss(convert);
     ss >> i;
-    if(ss.fail())
+    if (ss.fail())
     {
         return 0;
     }
@@ -25,28 +25,72 @@ int validation(string convert)
 }
 void rayTablePrint()
 {
+    char p0[100];
     for (int i = 0; i < tsize_y; i++)
     {
         for (int j = 0; j < tsize_x; j++)
         {
             cout << rayTable[i][j];
         }
-        cout << " " << i << endl;
+        if (i < 10)
+        {
+            p0[i] = i + 48;
+        }
+        if (i >= 10 && i < 36)
+        {
+            p0[i] = i + 87;
+        }
+        if (i >= 36)
+        {
+            p0[i] = i + 29;
+        }
+        cout << " " << p0[i] << endl;
     }
     cout << endl;
-    if (tsize_x <= 10)
+    /*
+    for (int i = 0; i < tsize_x; i++)
     {
-        for (int i = 0; i < tsize_y; i++)
+        int j = i/10;
+        if (j == 0)
         {
-            cout << i;
+            cout << i%10;
         }
-        cout << endl;
+        else
+        {
+            cout << j;
+        }
     }
-    else
+    cout << endl;
+    for (int i = 0; i < tsize_x; i++)
     {
-        cout << "0123456789";
-        //for (int i = 0;)
+        if (i < 10)
+        {
+            cout << " ";
+        }
+        else
+        {
+            cout << i%10;
+        }
+
     }
+    */
+    for (int i = 0; i < tsize_x; i++)
+    {
+        if (i < 10)
+        {
+            p0[i] = i + 48;
+        }
+        if (i >= 10 && i < 36)
+        {
+            p0[i] = i + 87;
+        }
+        if (i >= 36)
+        {
+            p0[i] = i + 29;
+        }
+        cout << p0[i];
+    }
+    cout << endl;
 }
 void rayTableClear()
 {
@@ -54,7 +98,7 @@ void rayTableClear()
     {
         for (int j = 0; j < tsize_x; j++)
         {
-            rayTable[i][j] = '0';
+            rayTable[i][j] = '.';
         }
     }
 
