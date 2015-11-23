@@ -4,8 +4,8 @@
 
 using namespace std;
 
-const short tsize_x = 50;
-const short tsize_y = 50;
+const short tsize_x = 20;
+const short tsize_y = 10;
 string rayTable[tsize_y][tsize_x];
 
 int validation(string convert)
@@ -47,33 +47,6 @@ void rayTablePrint()
         cout << " " << p0[i] << endl;
     }
     cout << endl;
-    /*
-    for (int i = 0; i < tsize_x; i++)
-    {
-        int j = i/10;
-        if (j == 0)
-        {
-            cout << i%10;
-        }
-        else
-        {
-            cout << j;
-        }
-    }
-    cout << endl;
-    for (int i = 0; i < tsize_x; i++)
-    {
-        if (i < 10)
-        {
-            cout << " ";
-        }
-        else
-        {
-            cout << i%10;
-        }
-
-    }
-    */
     for (int i = 0; i < tsize_x; i++)
     {
         if (i < 10)
