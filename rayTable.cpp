@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <windows.h>
+#include <conio.h>
 
 using namespace std;
 
@@ -8,6 +10,27 @@ const short tsize_x = 20;
 const short tsize_y = 10;
 string rayTable[tsize_y][tsize_x];
 
+int getx()
+{
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleScreenBufferInfo(h,&csbi);
+    return csbi.dwCursorPosition.X;
+}
+int gety()
+{
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleScreenBufferInfo(h,&csbi);
+    return csbi.dwCursorPosition.Y;
+}
+void gotoxy(int x, int y)
+{
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
 int validation(string convert)
 {
     int i;
