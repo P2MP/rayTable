@@ -126,6 +126,94 @@ void rayTableClear()
         }
     }
 }
+void rayDraw(COORD rayOrigin, short rayDirection)
+{
+    COORD rayCursor = rayOrigin;
+
+    switch (rayDirection)
+    {
+    case 2:
+        {
+            while (rayCursor.Y < tsize_y)
+            {
+                rayCursor.Y++;
+                rayTable[rayCursor.Y][rayCursor.X] = '1';
+            }
+            break;
+        }
+    case 4:
+        {
+            while (rayCursor.X > 0)
+            {
+                rayCursor.X--;
+                rayTable[rayCursor.Y][rayCursor.X] = '1';
+            }
+            break;
+        }
+    case 6:
+        {
+            while (rayCursor.X < tsize_x)
+            {
+                rayCursor.X++;
+                rayTable[rayCursor.Y][rayCursor.X] = '1';
+            }
+            break;
+        }
+    case 8:
+        {
+            while (rayCursor.Y > 0)
+            {
+                rayCursor.Y--;
+                rayTable[rayCursor.Y][rayCursor.X] = '1';
+            }
+            break;
+        }
+    case 1:
+        {
+            while (rayCursor.Y < tsize_y && rayCursor.X > 0)
+            {
+                rayCursor.Y++;
+                rayCursor.X--;
+                rayTable[rayCursor.Y][rayCursor.X] = '1';
+            }
+            break;
+        }
+    case 3:
+        {
+            while (rayCursor.Y < tsize_y && rayCursor.X < tsize_x)
+            {
+                rayCursor.Y++;
+                rayCursor.X++;
+                rayTable[rayCursor.Y][rayCursor.X] = '1';
+            }
+            break;
+        }
+    case 7:
+        {
+            while (rayCursor.Y > 0 && rayCursor.X > 0)
+            {
+                rayCursor.Y--;
+                rayCursor.X--;
+                rayTable[rayCursor.Y][rayCursor.X] = '1';
+            }
+            break;
+        }
+    case 9:
+        {
+            while (rayCursor.Y > 0 && rayCursor.X < tsize_x)
+            {
+                rayCursor.Y--;
+                rayCursor.X++;
+                rayTable[rayCursor.Y][rayCursor.X] = '1';
+            }
+            break;
+        }
+    default:
+        {
+
+        }
+    }
+}
 int main()
 {
     string xIn,yIn;
