@@ -18,7 +18,7 @@ int validation(string convert)
     ss >> i;
     if(ss.fail())
     {
-        return 0;
+        return -1;
     }
     else
     {
@@ -226,14 +226,14 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         }
     default:
         {
-
+            rayTable[rayOrigin.Y][rayOrigin.X] = '.';
         }
     }
 }
 int main()
 {
-    string xIn,yIn;
-    string rayDirection;
+    string xIn,yIn,rayDirectionIn;
+    int rayDirection;
     COORD cursorPos,rayTableIndex;
 
     rayTableClear();
@@ -258,7 +258,7 @@ int main()
                     cout << " ";
                 }
                 gotoCoord(cursorPos);
-                cout << endl << "Podano zla wartosc!";
+                cout << endl << "Podano zla wartosc!" << endl;
             }else
             {
                 gotoCoord(cursorPos);
@@ -273,8 +273,9 @@ int main()
         }
         while(rayTableIndex.X == -1 || rayTableIndex.Y == -1);
         cout << "W jakim kierunku skierowac laser?: ";
-        rayDirection = getch();
-        cout << rayDirection << endl;
+        rayDirectionIn = getch();
+        cout << rayDirectionIn << endl;
+        rayDirection = validation(rayDirectionIn);
         rayDraw(rayTableIndex, rayDirection);
         gotoxy(0,0);
         rayTablePrint();
@@ -282,6 +283,7 @@ int main()
         {
             cout << " ";
         }
+        gotoCoord(cursorPos);
     }
     return 0;
 }
