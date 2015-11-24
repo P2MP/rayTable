@@ -7,7 +7,7 @@
 using namespace std;
 
 const short tsize_x = 30;
-const short tsize_y = 15;
+const short tsize_y = 70;
 string rayTable[tsize_y][tsize_x];
 
 int getx()
@@ -102,9 +102,13 @@ void rayTablePrint()
         {
             p0[i] = i + 87;
         }
-        if (i >= 36)
+        if (i >= 36 && i < 62)
         {
             p0[i] = i + 29;
+        }
+        if (i >= 62)
+        {
+            p0[i] = 35;
         }
         cout << " " << p0[i] << endl;
     }
@@ -140,8 +144,9 @@ void rayTableClear()
 int main()
 {
     string xIn,yIn;
-    int xCoord,yCoord;
+    int xIndex,yIndex;
     COORD cursorPos;
+
     rayTableClear();
     rayTablePrint();
     cursorPos = getxy();
@@ -155,9 +160,9 @@ int main()
             cout << "Podaj wspolrzedna y: ";
             yIn = getch();
             cout << yIn << endl;
-            xCoord = strToCoordX(xIn);
-            yCoord = strToCoordY(yIn);
-            if(xCoord == -1 || yCoord == -1)
+            xIndex = strToCoordX(xIn);
+            yIndex = strToCoordY(yIn);
+            if(xIndex == -1 || yIndex == -1)
             {
                 gotoxy(cursorPos);
                 for(int i = 0; i < 400; i++)
@@ -173,10 +178,10 @@ int main()
                 {
                     cout << " ";
                 }
-                rayTable[yCoord][xCoord] = '*';
+                rayTable[yIndex][xIndex] = '*';
             }
         }
-        while(xCoord == -1 || yCoord == -1);
+        while(xIndex == -1 || yIndex == -1);
         COORD coord00;
         coord00.X = 0;
         coord00.Y = 0;
