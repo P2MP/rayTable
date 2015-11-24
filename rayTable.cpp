@@ -114,7 +114,7 @@ void rayTablePrint()
         }
         cout << p0[i];
     }
-    cout << endl;
+    cout << endl << endl;
 }
 void rayTableClear()
 {
@@ -217,6 +217,7 @@ void rayDraw(COORD rayOrigin, short rayDirection)
 int main()
 {
     string xIn,yIn;
+    string rayDirection;
     COORD cursorPos,rayTableIndex;
 
     rayTableClear();
@@ -226,7 +227,7 @@ int main()
     {
         do
         {
-            cout << endl << "Podaj wspolrzedna x: ";
+            cout << "Podaj wspolrzedna x: ";
             xIn = getch();
             cout << xIn << endl;
             cout << "Podaj wspolrzedna y: ";
@@ -241,7 +242,7 @@ int main()
                     cout << " ";
                 }
                 gotoCoord(cursorPos);
-                cout << endl << "Blad";
+                cout << endl << "Podano zla wartosc!";
             }else
             {
                 gotoCoord(cursorPos);
@@ -250,11 +251,21 @@ int main()
                     cout << " ";
                 }
                 rayTable[rayTableIndex.Y][rayTableIndex.X] = '*';
+                gotoxy(0,0);
+                rayTablePrint();
             }
         }
         while(rayTableIndex.X == -1 || rayTableIndex.Y == -1);
+        cout << "W jakim kierunku skierowac laser?: ";
+        rayDirection = getch();
+        cout << rayDirection << endl;
+        rayDraw(rayTableIndex, rayDirection);
         gotoxy(0,0);
         rayTablePrint();
+        for(int i = 0; i < 400; i++)
+        {
+            cout << " ";
+        }
     }
     return 0;
 }
