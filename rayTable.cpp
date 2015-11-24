@@ -7,7 +7,7 @@
 using namespace std;
 
 const short tsize_x = 30;
-const short tsize_y = 70;
+const short tsize_y = 15;
 string rayTable[tsize_y][tsize_x];
 
 int getx()
@@ -41,17 +41,13 @@ int strToCoordX(string str)
     int coord = -1;
     for (int i = 0; i < tsize_x; i++)
     {
-        if (i < 10)
+        if (i < 26)
         {
-            p0[i] = i + 48;
+            p0[i] = i + 97;
         }
-        if (i >= 10 && i < 36)
+        if (i >= 26)
         {
-            p0[i] = i + 87;
-        }
-        if (i >= 36)
-        {
-            p0[i] = i + 29;
+            p0[i] = i + 39;
         }
         if (str[0] == p0[i])
         {
@@ -66,17 +62,13 @@ int strToCoordY(string str)
     int coord = -1;
     for (int i = 0; i < tsize_y; i++)
     {
-        if (i < 10)
+        if (i < 26)
         {
-            p0[i] = i + 48;
+            p0[i] = i + 97;
         }
-        if (i >= 10 && i < 36)
+        if (i >= 26)
         {
-            p0[i] = i + 87;
-        }
-        if (i >= 36)
-        {
-            p0[i] = i + 29;
+            p0[i] = i + 39;
         }
         if (str[0] == p0[i])
         {
@@ -94,38 +86,26 @@ void rayTablePrint()
         {
             cout << rayTable[i][j];
         }
-        if (i < 10)
+        if (i < 26)
         {
-            p0[i] = i + 48;
+            p0[i] = i + 97;
         }
-        if (i >= 10 && i < 36)
+        if (i >= 26)
         {
-            p0[i] = i + 87;
-        }
-        if (i >= 36 && i < 62)
-        {
-            p0[i] = i + 29;
-        }
-        if (i >= 62)
-        {
-            p0[i] = 35;
+            p0[i] = i + 39;
         }
         cout << " " << p0[i] << endl;
     }
     cout << endl;
     for (int i = 0; i < tsize_x; i++)
     {
-        if (i < 10)
+        if (i < 26)
         {
-            p0[i] = i + 48;
+            p0[i] = i + 97;
         }
-        if (i >= 10 && i < 36)
+        if (i >= 26)
         {
-            p0[i] = i + 87;
-        }
-        if (i >= 36)
-        {
-            p0[i] = i + 29;
+            p0[i] = i + 39;
         }
         cout << p0[i];
     }
