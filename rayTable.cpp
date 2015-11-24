@@ -10,6 +10,22 @@ const short tsize_x = 30;
 const short tsize_y = 15;
 string rayTable[tsize_y][tsize_x];
 
+
+int validation(string convert)
+{
+    int i;
+    stringstream ss(convert);
+    ss >> i;
+    if(ss.fail())
+    {
+        return 0;
+    }
+    else
+    {
+        return i;
+    }
+
+}
 int getx()
 {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -136,17 +152,17 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         {
             while (rayCursor.Y < tsize_y)
             {
-                rayCursor.Y++;
                 rayTable[rayCursor.Y][rayCursor.X] = '1';
+                rayCursor.Y++;
             }
             break;
         }
     case 4:
         {
-            while (rayCursor.X > 0)
+            while (rayCursor.X >= 0)
             {
-                rayCursor.X--;
                 rayTable[rayCursor.Y][rayCursor.X] = '1';
+                rayCursor.X--;
             }
             break;
         }
@@ -154,27 +170,27 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         {
             while (rayCursor.X < tsize_x)
             {
-                rayCursor.X++;
                 rayTable[rayCursor.Y][rayCursor.X] = '1';
+                rayCursor.X++;
             }
             break;
         }
     case 8:
         {
-            while (rayCursor.Y > 0)
+            while (rayCursor.Y >= 0)
             {
-                rayCursor.Y--;
                 rayTable[rayCursor.Y][rayCursor.X] = '1';
+                rayCursor.Y--;
             }
             break;
         }
     case 1:
         {
-            while (rayCursor.Y < tsize_y && rayCursor.X > 0)
+            while (rayCursor.Y < tsize_y && rayCursor.X >= 0)
             {
+                rayTable[rayCursor.Y][rayCursor.X] = '1';
                 rayCursor.Y++;
                 rayCursor.X--;
-                rayTable[rayCursor.Y][rayCursor.X] = '1';
             }
             break;
         }
@@ -182,29 +198,29 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         {
             while (rayCursor.Y < tsize_y && rayCursor.X < tsize_x)
             {
+                rayTable[rayCursor.Y][rayCursor.X] = '1';
                 rayCursor.Y++;
                 rayCursor.X++;
-                rayTable[rayCursor.Y][rayCursor.X] = '1';
             }
             break;
         }
     case 7:
         {
-            while (rayCursor.Y > 0 && rayCursor.X > 0)
+            while (rayCursor.Y >= 0 && rayCursor.X >= 0)
             {
+                rayTable[rayCursor.Y][rayCursor.X] = '1';
                 rayCursor.Y--;
                 rayCursor.X--;
-                rayTable[rayCursor.Y][rayCursor.X] = '1';
             }
             break;
         }
     case 9:
         {
-            while (rayCursor.Y > 0 && rayCursor.X < tsize_x)
+            while (rayCursor.Y >= 0 && rayCursor.X < tsize_x)
             {
+                rayTable[rayCursor.Y][rayCursor.X] = '1';
                 rayCursor.Y--;
                 rayCursor.X++;
-                rayTable[rayCursor.Y][rayCursor.X] = '1';
             }
             break;
         }
