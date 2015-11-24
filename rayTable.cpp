@@ -24,55 +24,60 @@ int gety()
     GetConsoleScreenBufferInfo(h,&csbi);
     return csbi.dwCursorPosition.Y;
 }
-COORD getxy()
+COORD getCoord()
 {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
     GetConsoleScreenBufferInfo(h,&csbi);
     return csbi.dwCursorPosition;
 }
-void gotoxy(COORD coord)
+void gotoCoord(COORD coord)
 {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
-int strToCoordX(string str)
+void gotoxy(int x, int y)
 {
-    char p0[100];
-    int coord = -1;
-    for (int i = 0; i < tsize_x; i++)
-    {
-        if (i < 26)
-        {
-            p0[i] = i + 97;
-        }
-        if (i >= 26)
-        {
-            p0[i] = i + 39;
-        }
-        if (str[0] == p0[i])
-        {
-            coord = i;
-        }
-    }
-    return coord;
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
-int strToCoordY(string str)
+COORD strToIndex(string strx, string stry)
 {
-    char p0[100];
-    int coord = -1;
+    char px[100];
+    char py[100];
+    COORD coord;
+    coord.X = -1;
+    coord.Y = -1;
+
     for (int i = 0; i < tsize_y; i++)
     {
         if (i < 26)
         {
-            p0[i] = i + 97;
+            py[i] = i + 97;
         }
         if (i >= 26)
         {
-            p0[i] = i + 39;
+            py[i] = i + 39;
         }
-        if (str[0] == p0[i])
+        if (stry[0] == py[i])
         {
-            coord = i;
+            coord.Y = i;
+        }
+    }
+    for (int i = 0; i < tsize_x; i++)
+    {
+        if (i < 26)
+        {
+            px[i] = i + 97;
+        }
+        if (i >= 26)
+        {
+            px[i] = i + 39;
+        }
+        if (strx[0] == px[i])
+        {
+            coord.X = i;
         }
     }
     return coord;
@@ -124,12 +129,11 @@ void rayTableClear()
 int main()
 {
     string xIn,yIn;
-    int xIndex,yIndex;
-    COORD cursorPos;
+    COORD cursorPos,rayTableIndex;
 
     rayTableClear();
     rayTablePrint();
-    cursorPos = getxy();
+    cursorPos = getCoord();
     for(int j = 0; j == 0;)
     {
         do
@@ -140,32 +144,28 @@ int main()
             cout << "Podaj wspolrzedna y: ";
             yIn = getch();
             cout << yIn << endl;
-            xIndex = strToCoordX(xIn);
-            yIndex = strToCoordY(yIn);
-            if(xIndex == -1 || yIndex == -1)
+            rayTableIndex = strToIndex(xIn, yIn);
+            if(rayTableIndex.X == -1 || rayTableIndex.Y == -1)
             {
-                gotoxy(cursorPos);
+                gotoCoord(cursorPos);
                 for(int i = 0; i < 400; i++)
                 {
                     cout << " ";
                 }
-                gotoxy(cursorPos);
+                gotoCoord(cursorPos);
                 cout << endl << "Blad";
             }else
             {
-                gotoxy(cursorPos);
+                gotoCoord(cursorPos);
                 for(int i = 0; i < 400; i++)
                 {
                     cout << " ";
                 }
-                rayTable[yIndex][xIndex] = '*';
+                rayTable[rayTableIndex.Y][rayTableIndex.X] = '*';
             }
         }
-        while(xIndex == -1 || yIndex == -1);
-        COORD coord00;
-        coord00.X = 0;
-        coord00.Y = 0;
-        gotoxy(coord00);
+        while(rayTableIndex.X == -1 || rayTableIndex.Y == -1);
+        gotoxy(0,0);
         rayTablePrint();
     }
     return 0;
