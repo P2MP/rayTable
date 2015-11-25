@@ -6,9 +6,9 @@
 
 using namespace std;
 
-const short tsize_x = 30;
-const short tsize_y = 15;
-string rayTable[tsize_y][tsize_x];
+const short tsize_x = 26;
+const short tsize_y = 26;
+char rayTable[tsize_y][tsize_x];
 
 
 int validation(string convert)
@@ -152,7 +152,14 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         {
             while (rayCursor.Y < tsize_y)
             {
-                rayTable[rayCursor.Y][rayCursor.X] = '1';
+                if (rayTable[rayCursor.Y][rayCursor.X] == '.')
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] = '1';
+                }
+                else
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] += 1;
+                }
                 rayCursor.Y++;
             }
             break;
@@ -161,7 +168,14 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         {
             while (rayCursor.X >= 0)
             {
-                rayTable[rayCursor.Y][rayCursor.X] = '1';
+                if (rayTable[rayCursor.Y][rayCursor.X] == '.')
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] = '1';
+                }
+                else
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] += 1;
+                }
                 rayCursor.X--;
             }
             break;
@@ -170,7 +184,14 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         {
             while (rayCursor.X < tsize_x)
             {
-                rayTable[rayCursor.Y][rayCursor.X] = '1';
+                if (rayTable[rayCursor.Y][rayCursor.X] == '.')
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] = '1';
+                }
+                else
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] += 1;
+                }
                 rayCursor.X++;
             }
             break;
@@ -179,7 +200,14 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         {
             while (rayCursor.Y >= 0)
             {
-                rayTable[rayCursor.Y][rayCursor.X] = '1';
+                if (rayTable[rayCursor.Y][rayCursor.X] == '.')
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] = '1';
+                }
+                else
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] += 1;
+                }
                 rayCursor.Y--;
             }
             break;
@@ -188,7 +216,14 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         {
             while (rayCursor.Y < tsize_y && rayCursor.X >= 0)
             {
-                rayTable[rayCursor.Y][rayCursor.X] = '1';
+                if (rayTable[rayCursor.Y][rayCursor.X] == '.')
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] = '1';
+                }
+                else
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] += 1;
+                }
                 rayCursor.Y++;
                 rayCursor.X--;
             }
@@ -198,7 +233,14 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         {
             while (rayCursor.Y < tsize_y && rayCursor.X < tsize_x)
             {
-                rayTable[rayCursor.Y][rayCursor.X] = '1';
+                if (rayTable[rayCursor.Y][rayCursor.X] == '.')
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] = '1';
+                }
+                else
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] += 1;
+                }
                 rayCursor.Y++;
                 rayCursor.X++;
             }
@@ -208,7 +250,14 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         {
             while (rayCursor.Y >= 0 && rayCursor.X >= 0)
             {
-                rayTable[rayCursor.Y][rayCursor.X] = '1';
+                if (rayTable[rayCursor.Y][rayCursor.X] == '.')
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] = '1';
+                }
+                else
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] += 1;
+                }
                 rayCursor.Y--;
                 rayCursor.X--;
             }
@@ -218,7 +267,14 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         {
             while (rayCursor.Y >= 0 && rayCursor.X < tsize_x)
             {
-                rayTable[rayCursor.Y][rayCursor.X] = '1';
+                if (rayTable[rayCursor.Y][rayCursor.X] == '.')
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] = '1';
+                }
+                else
+                {
+                    rayTable[rayCursor.Y][rayCursor.X] += 1;
+                }
                 rayCursor.Y--;
                 rayCursor.X++;
             }
@@ -226,7 +282,6 @@ void rayDraw(COORD rayOrigin, short rayDirection)
         }
     default:
         {
-            rayTable[rayOrigin.Y][rayOrigin.X] = '.';
         }
     }
 }
@@ -241,6 +296,7 @@ int main()
     cursorPos = getCoord();
     for(int j = 0; j == 0;)
     {
+        char temp;
         do
         {
             cout << "Podaj wspolrzedna x: ";
@@ -266,9 +322,11 @@ int main()
                 {
                     cout << " ";
                 }
+                temp = rayTable[rayTableIndex.Y][rayTableIndex.X];
                 rayTable[rayTableIndex.Y][rayTableIndex.X] = '*';
                 gotoxy(0,0);
                 rayTablePrint();
+                rayTable[rayTableIndex.Y][rayTableIndex.X] = temp;
             }
         }
         while(rayTableIndex.X == -1 || rayTableIndex.Y == -1);
@@ -277,6 +335,10 @@ int main()
         cout << rayDirectionIn << endl;
         rayDirection = validation(rayDirectionIn);
         rayDraw(rayTableIndex, rayDirection);
+        if (rayTable[rayTableIndex.Y][rayTableIndex.X] == '*')
+        {
+            rayTable[rayTableIndex.Y][rayTableIndex.X] = temp;
+        }
         gotoxy(0,0);
         rayTablePrint();
         for(int i = 0; i < 400; i++)
