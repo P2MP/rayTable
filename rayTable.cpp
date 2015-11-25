@@ -289,11 +289,11 @@ int main()
 {
     string xIn,yIn,rayDirectionIn;
     int rayDirection;
-    COORD cursorPos,rayTableIndex;
+    COORD cursorPos1,cursorPos2,rayTableIndex;
 
     rayTableClear();
     rayTablePrint();
-    cursorPos = getCoord();
+    cursorPos1 = getCoord();
     for(int j = 0; j == 0;)
     {
         char temp;
@@ -305,32 +305,27 @@ int main()
             cout << "Podaj wspolrzedna y: ";
             yIn = getch();
             cout << yIn << endl;
+            cursorPos2 = getCoord();
             rayTableIndex = strToIndex(xIn, yIn);
             if(rayTableIndex.X == -1 || rayTableIndex.Y == -1)
             {
-                gotoCoord(cursorPos);
+                gotoCoord(cursorPos1);
                 for(int i = 0; i < 400; i++)
                 {
                     cout << " ";
                 }
-                gotoCoord(cursorPos);
+                gotoCoord(cursorPos1);
                 cout << endl << "Podano zla wartosc!" << endl;
-            }else
-            {
-                gotoCoord(cursorPos);
-                for(int i = 0; i < 400; i++)
-                {
-                    cout << " ";
-                }
-                temp = rayTable[rayTableIndex.Y][rayTableIndex.X];
-                rayTable[rayTableIndex.Y][rayTableIndex.X] = '*';
-                gotoxy(0,0);
-                rayTablePrint();
-                rayTable[rayTableIndex.Y][rayTableIndex.X] = temp;
             }
         }
         while(rayTableIndex.X == -1 || rayTableIndex.Y == -1);
-        cout << "W jakim kierunku skierowac laser?: ";
+        temp = rayTable[rayTableIndex.Y][rayTableIndex.X];
+        rayTable[rayTableIndex.Y][rayTableIndex.X] = '*';
+        gotoxy(0,0);
+        rayTablePrint();
+        rayTable[rayTableIndex.Y][rayTableIndex.X] = temp;
+        gotoCoord(cursorPos2);
+        cout << "W jakim kierunku skierowac laser? ";
         rayDirectionIn = getch();
         cout << rayDirectionIn << endl;
         rayDirection = validation(rayDirectionIn);
@@ -345,7 +340,7 @@ int main()
         {
             cout << " ";
         }
-        gotoCoord(cursorPos);
+        gotoCoord(cursorPos1);
     }
     return 0;
 }
